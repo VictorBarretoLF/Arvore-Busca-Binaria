@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class MeuMenu {
 	
 	public void mostrarMenu() {
-		System.out.println("Escolha uma das opções.");
+		System.out.println("\nEscolha uma das opções.\n");
 		System.out.println("1 - INSERIR - forneça o RGM e o Nome.");
 		System.out.println("2 - REMOVER - forneça o RGM a ser removido.");
 		System.out.println("3 - PESQUISAR - forneça o RGM a ser pesquisado.");
@@ -16,37 +16,45 @@ public class MeuMenu {
 		System.out.println("0 - SAIR");
 	}
 	
-	public void apagarConsole() throws InterruptedException, IOException {
+	public void apagarConsole() {
 		 for(int i = 0; i < 50; i++) System.out.println();
 	}
 	
-	public int validandoRGM(ArvoreBinariaBusca abb) throws NumberFormatException, IOException, InterruptedException {
+	private int validarRgmComoInteiro() throws IOException {
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
-		
-		System.out.println("Digite o RGM do aluno");
 		
 		while(true) {
 			try {
 				int rgm = Integer.parseInt(br.readLine());
+				return rgm;
+			} catch (NumberFormatException e) {
+				System.out.println("Formato de RGM inválido!");
+				System.out.println("Digite o RGM do aluno");
+			}
+		}
+		
+	}
+	
+	public int validandoRGM(ArvoreBinariaBusca abb) throws IOException {
+
+		while(true) {
+				int rgm = validarRgmComoInteiro();
 				// checa se o rgm já existe de acordo com a árvore
-				if (checarRgmExistente(abb, rgm)) continue;
+				if (checarRgmExistente(abb, rgm)) {
+					System.out.println("Esse rgm já existe, digite um novo:");
+					continue;
+				}
 				System.out.println("RGM válido!");
-				TimeUnit.SECONDS.sleep(5);
+//				TimeUnit.SECONDS.sleep(5);
 				apagarConsole();
 				return rgm;
-			} catch(NumberFormatException e) {
-				System.out.println("Formato de RGM inválido!");
-			}
 		}
 	}
 	
 	// recebe uma arvore e um rgm para verificar se o rgm existe ou não naquela arvore.
 	private boolean checarRgmExistente(ArvoreBinariaBusca abb, int rgm) {
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
-		if(abb.encontrarRGM(rgm)) {
-			System.out.println("Esse rgm já existe, digite um novo:");
-			return true;
-		}
+		if(abb.encontrarRGM(rgm)) return true;
 		return false;
 	}
 	
@@ -55,5 +63,13 @@ public class MeuMenu {
 		String nome = br.readLine();
 		return nome;
 	}
-
+	
+	public NoAluno procurarRgm(ArvoreBinariaBusca abb) throws IOException {
+		System.out.println("Digite o rgm que deseja procurar:");
+		int rgm = validarRgmComoInteiro();
+		if(abb.encontrarAluno(rgm) != null) return abb.encontrarAluno(rgm);
+		return null;
+		
+	}
+	
 }

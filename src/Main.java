@@ -25,6 +25,7 @@ public class Main {
 			int chave = sc.nextInt();
 			menu.apagarConsole();
 			switch (chave) {
+				 // OPÇÃO PARA INSERIR UM NOVO ALUNO!
 				case 1 : 
 					System.out.println("Opção escolhida 1 - INSERIR");
 					int rgm = menu.validandoRGM(abb);
@@ -35,6 +36,12 @@ public class Main {
 				case 2 :
 					System.out.println("Digite o RGM a ser removido.");
 					chave = sc.nextInt();
+					break;
+				case 3 : 
+					System.out.println("Opção escolhida 3 - PESQUISAR");
+					NoAluno aluno = menu.procurarRgm(abb);
+					if(aluno == null) System.out.println("Aluno não encontrado!");
+					else System.out.println("Aluno encontrado!\n" + aluno);
 					break;
 				default : sair = false;
 			}

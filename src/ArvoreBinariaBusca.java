@@ -31,6 +31,19 @@ public class ArvoreBinariaBusca {
 		return encontrarRgmRecursivo(raiz, rgmProcurado);
 	}
 	
+	private NoAluno encontrarAlunoRecursivo(NoAluno noAtual, int rgmProcurado) {
+		if (noAtual == null) return null;
+		if (rgmProcurado == noAtual.rgm) return noAtual;
+		
+		return rgmProcurado < noAtual.rgm 
+				? encontrarAlunoRecursivo(noAtual.esquerda, rgmProcurado)
+				: encontrarAlunoRecursivo(noAtual.direita, rgmProcurado);
+	}
+	
+	public NoAluno encontrarAluno(int rgmProcurado) {
+		return encontrarAlunoRecursivo(raiz, rgmProcurado);
+	}
+	
 	private int encontrarMenorValor(NoAluno atual) {
 		return atual.esquerda == null ? atual.rgm : encontrarMenorValor(atual.esquerda);
 	}
