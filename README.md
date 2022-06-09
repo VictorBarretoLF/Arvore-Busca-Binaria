@@ -1,5 +1,3 @@
-# Markdown syntax guide
-
 # Arvore-Busca-Binaria
 
 #### Alunos
