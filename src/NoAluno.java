@@ -13,6 +13,10 @@ public class NoAluno {
 		direita = null;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+	
 	@Override
 	public String toString() {
 		return "(Nome: " + this.nome + " - RGM: " + this.rgm + ")";

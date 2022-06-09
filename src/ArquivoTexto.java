@@ -1,6 +1,10 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class ArquivoTexto {
 	
@@ -33,6 +37,36 @@ public class ArquivoTexto {
 	
 	public String getNomeDoArquivo() {
 		return this.nomeDoArquivo;
+	}
+	
+	public void criarArvoreUsandoArquivo(ArvoreBinariaBusca abb) throws NumberFormatException, IOException {
+	    try {
+	    	FileReader fr= new FileReader(this.nomeDoArquivo);    
+	    	BufferedReader br=new BufferedReader(fr);  
+	        
+	        String data;
+	        while ((data = br.readLine()) != null) {
+	        	int rgm = Integer.parseInt(data.substring(0, data.indexOf(" ")));
+	        	String nome = data.substring(data.indexOf(" "));
+	        	abb.add(rgm, nome);
+	        }
+	        br.close();
+	      } catch (FileNotFoundException e) {
+	        System.out.println("Um erro aconteceu!");
+	        e.printStackTrace();
+	      }
+	}
+	
+	public void reescreverAposDeletar(ArvoreBinariaBusca abb) {
+		System.out.println(abb.dadosDaArvoreEmString());
+	}
+	
+	public void apagarDadosDoArquivo() throws FileNotFoundException {
+		File file = new File(this.nomeDoArquivo);
+		PrintWriter writer = new PrintWriter(file);
+		writer.print("");
+//		writer.write();
+		writer.close();
 	}
 
 }

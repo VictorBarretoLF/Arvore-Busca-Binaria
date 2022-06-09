@@ -16,6 +16,21 @@ public class MeuMenu {
 		System.out.println("0 - SAIR");
 	}
 	
+	public void mostrarArvore(ArvoreBinariaBusca abb) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("1 - EXIBIR ÁRVORE E NÓS");
+		System.out.println("2 - EXIBIR ÁRVORE PRÉ-ORDEM");
+		System.out.println("3 - EXIBIR ÁRVORE PÓS-ORDEM");
+		System.out.println("4 - EXIBIR ÁRVORE IN-ORDEM");
+		int escolha = Integer.parseInt(br.readLine());
+		switch (escolha) {
+			case 1 : abb.mostrarArvore(); break;
+			case 2 : abb.mostrarPreOrdem(); break;
+			case 3 : abb.mostrarPosOrdem(); break;
+			default :abb.mostrarEmOrdem(); break;
+		}
+	}
+	
 	public void apagarConsole() {
 		 for(int i = 0; i < 50; i++) System.out.println();
 	}
@@ -36,18 +51,16 @@ public class MeuMenu {
 	}
 	
 	public int validandoRGM(ArvoreBinariaBusca abb) throws IOException {
-
+		System.out.println("Digite o RGM:");
 		while(true) {
-				int rgm = validarRgmComoInteiro();
-				// checa se o rgm já existe de acordo com a árvore
-				if (checarRgmExistente(abb, rgm)) {
-					System.out.println("Esse rgm já existe, digite um novo:");
-					continue;
-				}
-				System.out.println("RGM válido!");
-//				TimeUnit.SECONDS.sleep(5);
-				apagarConsole();
-				return rgm;
+			int rgm = validarRgmComoInteiro();
+			// checa se o rgm já existe de acordo com a árvore
+			if (checarRgmExistente(abb, rgm)) {
+				System.out.println("Esse rgm já existe, digite um novo:");
+				continue;
+			}
+			System.out.println("RGM válido!");
+			return rgm;
 		}
 	}
 	
@@ -59,6 +72,7 @@ public class MeuMenu {
 	}
 	
 	public String validandoNome() throws IOException {
+		System.out.println("Digite o nome:");
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
 		String nome = br.readLine();
 		return nome;
@@ -69,7 +83,6 @@ public class MeuMenu {
 		int rgm = validarRgmComoInteiro();
 		if(abb.encontrarAluno(rgm) != null) return abb.encontrarAluno(rgm);
 		return null;
-		
 	}
 	
 }

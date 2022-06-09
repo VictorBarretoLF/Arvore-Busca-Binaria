@@ -1,4 +1,5 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArvoreBinariaBusca {
 	
@@ -86,24 +87,42 @@ public class ArvoreBinariaBusca {
 	private void mostrarEmOrdemRecursivo(NoAluno raiz) {
 	    if (raiz != null) {
 	    	mostrarEmOrdemRecursivo(raiz.esquerda);
-	        System.out.print(" " + raiz.rgm);
+	        System.out.println(raiz);
 	        mostrarEmOrdemRecursivo(raiz.direita);
 	    }
 	}
 	
 	public void mostrarEmOrdem() {
+		System.out.println("EXIBINDO IN-ORDEM");
 		mostrarEmOrdemRecursivo(raiz);
 	}
 	
 	private void mostrarPreOrdem(NoAluno raiz) {
 	    if (raiz != null) {
-	    	System.out.print(" " + raiz.rgm);
+	    	System.out.println(raiz);
 	    	mostrarPreOrdem(raiz.esquerda);
 	    	mostrarPreOrdem(raiz.direita);
 	    }
 	}
+	
+	private void dadosDaArvoreEmString(NoAluno raiz, List<String> li) {
+		if (raiz != null) {
+	    	li.add(raiz.rgm + " " + raiz.getNome() + "\n");
+	    	dadosDaArvoreEmString(raiz.esquerda, li);
+	    	dadosDaArvoreEmString(raiz.direita, li);
+		}
+	}
+	
+	public String dadosDaArvoreEmString() {
+		ArrayList<String> lista = new ArrayList<String>();
+		dadosDaArvoreEmString(raiz, lista);
+		String dados = "";
+		for(String usuario : lista) dados += usuario;
+		return dados;
+	}
 
 	public void mostrarPreOrdem() {
+		System.out.println("EXIBINDO PRÉ-ORDEM");
 		mostrarPreOrdem(raiz);
 	}
 	
@@ -111,36 +130,38 @@ public class ArvoreBinariaBusca {
 		if(raiz != null) {
 			mostrarPosOrdem(raiz.esquerda);
 			mostrarPosOrdem(raiz.direita);
-			System.out.print(" " + raiz.rgm);
+			System.out.println(raiz);
 		}
 	}
 	
 	public void mostrarPosOrdem() {
+		System.out.println("EXIBINDO PÓS-ORDEM");
 		mostrarPosOrdem(raiz);
+	}
+	
+	private void mostrarArvoreRecursivo(NoAluno atual) {
+		if (this.contador == 0) System.out.println("Raiz: " + atual);
+		else System.out.println(atual);
+		
+		this.contador++;
+		if (atual.esquerda != null) {
+			System.out.print("\t".repeat(Math.max(0, contador)) + "|____> Nó esquerda: ");
+			mostrarArvoreRecursivo(atual.esquerda);
+		}
+		
+		if (atual.direita != null) {
+			System.out.print("\t".repeat(Math.max(0, contador)) + "|____> Nó direita: ");
+			mostrarArvoreRecursivo(atual.direita);
+		}
+		
+		this.contador--;
 	}
 	
 	private int contador = 0;
 	public void mostrarArvore() {
 		this.contador = 0;
-		mostrarArvoreRecursivo(raiz);
-	}
-	
-	private void mostrarArvoreRecursivo(NoAluno atual) {
-		if (this.contador == 0) System.out.println("Raiz: " +atual);
-		else System.out.println(atual);
-		
-		this.contador++;
-		if (atual.esquerda != null) {
-			System.out.print("\t".repeat(Math.max(0, contador)) + "Nó esquerda: ");
-			mostrarArvoreRecursivo(atual.esquerda);
-		}
-		
-		if (atual.direita != null) {
-			System.out.print("\t".repeat(Math.max(0, contador)) + "Nó direita: ");
-			mostrarArvoreRecursivo(atual.direita);
-		}
-		
-		this.contador--;
+		if(raiz == null) System.out.println("Árvore vazia.");
+		else mostrarArvoreRecursivo(raiz);
 	}
 
 }

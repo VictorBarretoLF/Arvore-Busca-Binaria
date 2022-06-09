@@ -14,8 +14,8 @@ public class Main {
 		ArquivoTexto txt = new ArquivoTexto("lista.txt");
 		MeuMenu menu = new MeuMenu();
 		Scanner sc = new Scanner(System.in);
-		
-		criarArvoreUsandoArquivo(abb, txt);
+		NoAluno aluno;
+		txt.criarArvoreUsandoArquivo(abb);
 			    
 		boolean sair = true;
 		while(sair) {
@@ -34,41 +34,35 @@ public class Main {
 					txt.escreverNoArquivo(rgm + " " + nome);
 					break;
 				case 2 :
-					System.out.println("Digite o RGM a ser removido.");
-					chave = sc.nextInt();
+					System.out.println("Opção escolhida 3 - REMOVER UM NÓ");
+					aluno = menu.procurarRgm(abb);
+					if(aluno == null) System.out.println("Aluno não encontrado!");
+					else {
+						System.out.println("Aluno removido com sucesso!!!\n" + aluno);
+						abb.deletar(aluno.rgm);
+					}
+//					txt.apagarDadosDoArquivo();
+					txt.reescreverAposDeletar(abb);
 					break;
 				case 3 : 
 					System.out.println("Opção escolhida 3 - PESQUISAR");
-					NoAluno aluno = menu.procurarRgm(abb);
+					aluno = menu.procurarRgm(abb);
 					if(aluno == null) System.out.println("Aluno não encontrado!");
 					else System.out.println("Aluno encontrado!\n" + aluno);
+					break;
+				case 4 :
+					System.out.println("Opção escolhida 4 - ESVAZIAR ÁRVORE");
+					break;
+				case 5 :
+					System.out.println("Opção escolhida 5 - EXIBIR A ÁRVORE");
+					menu.mostrarArvore(abb);
 					break;
 				default : sair = false;
 			}
 			
 		}
 		System.out.println("APLICAÇÃO FINALIZADA, OBRIGADO!");
-	    abb.mostrarArvore();
 	    
 	}
 	
-	public static void criarArvoreUsandoArquivo(ArvoreBinariaBusca abb, ArquivoTexto txt) throws NumberFormatException, IOException {
-	    try {
-	    	FileReader fr= new FileReader(txt.getNomeDoArquivo());    
-	    	BufferedReader br=new BufferedReader(fr);  
-	        
-	        String data;
-	        while ((data = br.readLine()) != null) {
-	        	int rgm = Integer.parseInt(data.substring(0, data.indexOf(" ")));
-	        	String nome = data.substring(data.indexOf(" "));
-	          abb.add(rgm, nome);
-	        }
-	        br.close();
-	      } catch (FileNotFoundException e) {
-	        System.out.println("An error occurred.");
-	        e.printStackTrace();
-	      }
-	}
-	
-
 }

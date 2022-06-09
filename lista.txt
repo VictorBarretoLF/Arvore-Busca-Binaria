@@ -1,7 +1,7 @@
-123456 victor barreto
-123543 lucas
-1243435 victor lins
-543234 josé
-543213 joaão
-123412 fernando
-172365 zé
+1 victor
+2 lucas
+20 thiago
+5 pedro
+17 bozo
+13 lula
+10 thiago
