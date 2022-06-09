@@ -57,11 +57,19 @@ public class ArquivoTexto {
 	      }
 	}
 	
-	public void reescreverAposDeletar(ArvoreBinariaBusca abb) {
-		System.out.println(abb.dadosDaArvoreEmString());
+	public void reescreverArquivo(ArvoreBinariaBusca abb) throws FileNotFoundException {
+		apagarDadosDoArquivo();
+		try {
+	        FileWriter myWriter = new FileWriter(this.nomeDoArquivo, true);
+	        myWriter.write(abb.dadosDaArvoreEmString());
+	        myWriter.close();
+		} catch (IOException e) {
+	        System.out.println("Um erro aconteceu!!!!!!");
+	        e.printStackTrace();
+	     }
 	}
 	
-	public void apagarDadosDoArquivo() throws FileNotFoundException {
+	private void apagarDadosDoArquivo() throws FileNotFoundException {
 		File file = new File(this.nomeDoArquivo);
 		PrintWriter writer = new PrintWriter(file);
 		writer.print("");

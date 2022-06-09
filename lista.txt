@@ -1,7 +1,5 @@
-1 victor
-2 lucas
-20 thiago
-5 pedro
-17 bozo
-13 lula
-10 thiago
+20   thiago
+5   pedro
+17   bozo
+13   lula
+10   thiago

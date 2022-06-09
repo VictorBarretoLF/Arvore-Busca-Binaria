@@ -42,7 +42,7 @@ public class Main {
 						abb.deletar(aluno.rgm);
 					}
 //					txt.apagarDadosDoArquivo();
-					txt.reescreverAposDeletar(abb);
+					txt.reescreverArquivo(abb);
 					break;
 				case 3 : 
 					System.out.println("Opção escolhida 3 - PESQUISAR");
