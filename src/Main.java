@@ -40,9 +40,8 @@ public class Main {
 					else {
 						System.out.println("Aluno removido com sucesso!!!\n" + aluno);
 						abb.deletar(aluno.rgm);
+						txt.reescreverArquivo(abb);
 					}
-//					txt.apagarDadosDoArquivo();
-					txt.reescreverArquivo(abb);
 					break;
 				case 3 : 
 					System.out.println("Opção escolhida 3 - PESQUISAR");
@@ -52,6 +51,9 @@ public class Main {
 					break;
 				case 4 :
 					System.out.println("Opção escolhida 4 - ESVAZIAR ÁRVORE");
+					abb.esvaziarArvoreRecursivo();
+					txt.apagarDadosDoArquivo();
+					System.out.println("Arvore esvaziada com sucesso!");
 					break;
 				case 5 :
 					System.out.println("Opção escolhida 5 - EXIBIR A ÁRVORE");

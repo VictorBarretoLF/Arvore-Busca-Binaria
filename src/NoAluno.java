@@ -19,7 +19,7 @@ public class NoAluno {
 	
 	@Override
 	public String toString() {
-		return "(Nome: " + this.nome + " - RGM: " + this.rgm + ")";
+		return "(Nome: " + this.nome + "- RGM: " + this.rgm + ")";
 	}
 
 }

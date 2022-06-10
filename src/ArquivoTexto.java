@@ -69,11 +69,10 @@ public class ArquivoTexto {
 	     }
 	}
 	
-	private void apagarDadosDoArquivo() throws FileNotFoundException {
+	public void apagarDadosDoArquivo() throws FileNotFoundException {
 		File file = new File(this.nomeDoArquivo);
 		PrintWriter writer = new PrintWriter(file);
 		writer.print("");
-//		writer.write();
 		writer.close();
 	}
 

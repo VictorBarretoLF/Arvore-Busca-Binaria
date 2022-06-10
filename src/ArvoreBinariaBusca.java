@@ -164,4 +164,15 @@ public class ArvoreBinariaBusca {
 		else mostrarArvoreRecursivo(raiz);
 	}
 
+	private void esvaziarArvoreRecursivo(NoAluno raiz) {
+		if(raiz != null) {
+			esvaziarArvoreRecursivo(raiz.esquerda);
+			esvaziarArvoreRecursivo(raiz.direita);
+			this.raiz = null;
+		}
+	}
+	
+	public void esvaziarArvoreRecursivo() {
+		esvaziarArvoreRecursivo(raiz);
+	}
 }
