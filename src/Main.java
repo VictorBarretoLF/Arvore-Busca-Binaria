@@ -14,7 +14,6 @@ public class Main {
 		ArquivoTexto txt = new ArquivoTexto("lista.txt");
 		MeuMenu menu = new MeuMenu();
 		Scanner sc = new Scanner(System.in);
-		NoAluno aluno;
 		txt.criarArvoreUsandoArquivo(abb);
 			    
 		boolean sair = true;
@@ -35,11 +34,11 @@ public class Main {
 					break;
 				case 2 :
 					System.out.println("Opção escolhida 3 - REMOVER UM NÓ");
-					aluno = menu.procurarRgm(abb);
+					NoAluno aluno = menu.procurarRgm(abb);
 					if(aluno == null) System.out.println("Aluno não encontrado!");
 					else {
 						System.out.println("Aluno removido com sucesso!!!\n" + aluno);
-						abb.deletar(aluno.rgm);
+						abb.deletar(aluno.getRgm());
 						txt.reescreverArquivo(abb);
 					}
 					break;

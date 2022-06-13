@@ -8,8 +8,8 @@ public class ArvoreBinariaBusca {
 	private NoAluno addRecursivo(NoAluno atual, int valor, String nome) {
 		if (atual == null) return new NoAluno(valor, nome);
 		
-		if (valor < atual.rgm) atual.esquerda = addRecursivo(atual.esquerda, valor, nome);
-		else if (valor > atual.rgm) atual.direita = addRecursivo(atual.direita, valor, nome);
+		if (valor < atual.getRgm()) atual.esquerda = addRecursivo(atual.esquerda, valor, nome);
+		else if (valor > atual.getRgm()) atual.direita = addRecursivo(atual.direita, valor, nome);
 		else return atual;
 		
 		return atual;
@@ -21,9 +21,9 @@ public class ArvoreBinariaBusca {
 	
 	private boolean encontrarRgmRecursivo(NoAluno noAtual, int rgmProcurado) {
 		if (noAtual == null) return false;
-		if (rgmProcurado == noAtual.rgm) return true;
+		if (rgmProcurado == noAtual.getRgm()) return true;
 		
-		return rgmProcurado < noAtual.rgm 
+		return rgmProcurado < noAtual.getRgm()
 				? encontrarRgmRecursivo(noAtual.esquerda, rgmProcurado)
 				: encontrarRgmRecursivo(noAtual.direita, rgmProcurado);
 	}
@@ -34,9 +34,9 @@ public class ArvoreBinariaBusca {
 	
 	private NoAluno encontrarAlunoRecursivo(NoAluno noAtual, int rgmProcurado) {
 		if (noAtual == null) return null;
-		if (rgmProcurado == noAtual.rgm) return noAtual;
+		if (rgmProcurado == noAtual.getRgm()) return noAtual;
 		
-		return rgmProcurado < noAtual.rgm 
+		return rgmProcurado < noAtual.getRgm() 
 				? encontrarAlunoRecursivo(noAtual.esquerda, rgmProcurado)
 				: encontrarAlunoRecursivo(noAtual.direita, rgmProcurado);
 	}
@@ -45,8 +45,8 @@ public class ArvoreBinariaBusca {
 		return encontrarAlunoRecursivo(raiz, rgmProcurado);
 	}
 	
-	private int encontrarMenorValor(NoAluno atual) {
-		return atual.esquerda == null ? atual.rgm : encontrarMenorValor(atual.esquerda);
+	private NoAluno encontrarMenorValor(NoAluno atual) {
+		return atual.esquerda == null ? atual : encontrarMenorValor(atual.esquerda);
 	}
 	
 	private NoAluno deletarRecursivo(NoAluno atual, int rgmDeletar) {
@@ -55,7 +55,7 @@ public class ArvoreBinariaBusca {
 			return null;
 		}
 		// casos para poder deletar o nó
-		if (rgmDeletar == atual.rgm) {
+		if (rgmDeletar == atual.getRgm()) {
 			
 			// o nó não possui nenhum filho
 			if (atual.esquerda == null && atual.direita == null) return null;
@@ -64,13 +64,15 @@ public class ArvoreBinariaBusca {
 			if (atual.direita == null) return atual.esquerda;
 			if (atual.esquerda == null) return atual.direita;
 			
-			int menorValor = encontrarMenorValor(atual.direita);
-			atual.rgm = menorValor;
+			NoAluno alunoMenorValor = encontrarMenorValor(atual.direita);
+			int menorValor = alunoMenorValor.getRgm();
+			atual.setRgm(menorValor);
+			atual.setNome(alunoMenorValor.getNome());
 			atual.direita = deletarRecursivo(atual.direita, menorValor);
 			return atual;
 		}
 		
-		if (rgmDeletar < atual.rgm) {
+		if (rgmDeletar < atual.getRgm()) {
 			atual.esquerda = deletarRecursivo(atual.esquerda, rgmDeletar);
 			return atual;
 		}
@@ -107,7 +109,7 @@ public class ArvoreBinariaBusca {
 	
 	private void dadosDaArvoreEmString(NoAluno raiz, List<String> li) {
 		if (raiz != null) {
-	    	li.add(raiz.rgm + " " + raiz.getNome() + "\n");
+	    	li.add(raiz.getRgm() + " " + raiz.getNome() + "\n");
 	    	dadosDaArvoreEmString(raiz.esquerda, li);
 	    	dadosDaArvoreEmString(raiz.direita, li);
 		}

@@ -1,7 +1,7 @@
 
 public class NoAluno {
 	
-	int rgm;
+	private int rgm;
 	private String nome;
 	NoAluno esquerda;
 	NoAluno direita;
@@ -13,8 +13,20 @@ public class NoAluno {
 		direita = null;
 	}
 	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	public String getNome() {
 		return nome;
+	}
+	
+	public int getRgm() {
+		return this.rgm;
+	}
+	
+	public void setRgm(int rgm) {
+		this.rgm = rgm;
 	}
 	
 	@Override
